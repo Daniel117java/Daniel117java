@@ -1,5 +1,13 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
-resources:
-  - source-podinfo.yaml
-  - kustomization-podinfo.yaml
+metadata:
+  name: podinfo-kustomization
+  namespace: flux
+spec:
+  interval: 1m
+  path: ./clusters/my-cluster
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: daniel-repo
+  targetNamespace: default
